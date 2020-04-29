@@ -1,8 +1,8 @@
+// importando módulo crypto para gerar id randômica de forma separada para poder realizar testes
+const generateUniqueId = require('../utils/generateUniqueId');
+
 //Importando a conexão com o banco de dados
 const connection = require('../database/connection');
-
-// importando módulo crypto para gerar id randômica
-const crypto = require('crypto');
 
 module.exports = {
     async index(request, response) {
@@ -14,7 +14,7 @@ module.exports = {
     async create(request, response) {
         const { name, email, whatsapp, city, uf } = request.body;
 
-        const  id = crypto.randomBytes(4).toString('HEX');
+        const  id = generateUniqueId();
 
         await connection('ongs').insert({
             id,
